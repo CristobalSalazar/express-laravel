@@ -1,6 +1,8 @@
-import { Application, Request, Response, Router } from 'express'
+import { Request, Response, Router } from 'express'
+import { WithValidate } from 'lib/middleware/validate.middleware'
 
-type RouteHandler = (req: Request, res: Response) => any
+export type AppRequest = Request & WithValidate
+export type AppRouteHandler = (req: AppRequest, res: Response) => any
 
 // underlying router instance
 const router = Router()
@@ -13,29 +15,29 @@ function initRouter(router: Router) {
     getExpressRouter() {
       return router
     },
-    get(route: string, handler: RouteHandler) {
+    get(route: string, handler: AppRouteHandler) {
       router.get(route, withReturnValue(handler))
     },
-    put(route: string, handler: RouteHandler) {
+    put(route: string, handler: AppRouteHandler) {
       router.put(route, withReturnValue(handler))
     },
 
-    post(route: string, handler: RouteHandler) {
+    post(route: string, handler: AppRouteHandler) {
       router.post(route, withReturnValue(handler))
     },
 
-    del(route: string, handler: RouteHandler) {
+    del(route: string, handler: AppRouteHandler) {
       router.delete(route, withReturnValue(handler))
     },
   }
 }
 
-function withReturnValue(handler: RouteHandler) {
+function withReturnValue(handler: AppRouteHandler) {
   return async function (req: Request, res: Response) {
     try {
       console.log('custom handler')
       if (res.writableEnded) return
-      const ret = await handler(req, res)
+      const ret = await handler(req as any, res)
       handleReturnValue(res, ret)
     } catch (err) {
       handleError(err, res)

@@ -1,13 +1,22 @@
-import { createModel } from '../lib/models/create-model'
+import { createModel, hasMany } from '../lib/models/create-model'
 
 export type User = {
+  name: string
   email: string
   password: string
 }
 
 export default createModel<User>({
-  name: 'User',
+  name: 'User', // a problem how can I fix this?
+  options: {
+    timestamps: true,
+  },
   schema: {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
     email: {
       type: String,
       unique: true,
@@ -19,13 +28,11 @@ export default createModel<User>({
       required: true,
       minlength: 8,
     },
+    posts: hasMany('Posts', true),
   },
   hooks: schema => {
     schema.pre('save', () => {
       console.log('saving User')
     })
-  },
-  options: {
-    timestamps: true,
   },
 })

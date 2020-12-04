@@ -1,5 +1,5 @@
-import HttpError from '../lib/errors/http-error'
-import AuthController from '../controllers/AuthController'
+import HttpError from '../lib/errors/http-errors'
+import AuthController from '../controllers/auth.controller'
 import router from '../lib/router'
 
 function test() {

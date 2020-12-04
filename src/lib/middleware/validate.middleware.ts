@@ -1,10 +1,8 @@
-import { Request } from 'express'
-import { ObjectSchema } from 'joi'
 import Joi from 'joi'
-import HttpError from '../errors/http-error'
+import HttpError, { BadRequestError } from '../errors/http-errors'
 
-export interface CustomRequest extends Request {
-  validate: (rules: ObjectSchema) => any
+export type WithValidate = {
+  validate: (rules: Object, httpError?: HttpError) => any
 }
 
 export default function validate(
@@ -20,12 +18,10 @@ export default function validate(
         .map(detail => detail.message)
         .join(', ')
         .replace(/"/g, "'")
-
-      throw httpError || new HttpError(400, errmsg)
+      throw httpError || new BadRequestError(errmsg)
     } else {
       return value
     }
   }
-
   next()
 }
