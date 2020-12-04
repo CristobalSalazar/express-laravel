@@ -1,10 +1,15 @@
 import User from "../models/User";
 import Joi from "joi";
+import { Request } from 'express';
 
 class AuthController {
-  async login(req: any) {}
+  async login(req: Request) {
+    // hello
+    //
+    return req;
+  }
 
-  async register(req: any) {
+  async register(req: Request & { validate: (obj: object) => any }) {
     req.validate({
       email: Joi.string().email().required(),
       password: Joi.string().min(8).required(),
