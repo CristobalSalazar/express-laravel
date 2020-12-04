@@ -1,23 +1,31 @@
-import { Schema, model } from "mongoose";
+import { createModel } from '../lib/models/create-model'
 
-const schema = new Schema({
-  email: {
-    type: String,
-    unique: true,
-    trim: true,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 8,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: Date,
-});
+export type User = {
+  email: string
+  password: string
+}
 
-const User = model("User", schema);
-export default User;
+export default createModel<User>({
+  name: 'User',
+  schema: {
+    email: {
+      type: String,
+      unique: true,
+      trim: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+    },
+  },
+  hooks: schema => {
+    schema.pre('save', () => {
+      console.log('saving User')
+    })
+  },
+  options: {
+    timestamps: true,
+  },
+})
