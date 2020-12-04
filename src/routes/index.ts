@@ -1,7 +1,13 @@
-import AuthController from "../controllers/AuthController";
-import CustomRouter from "../lib/routing/custom-router";
+import HttpError from '../lib/errors/http-error'
+import AuthController from '../controllers/AuthController'
+import router from '../lib/router'
 
-export default function routes(router: CustomRouter) {
-  router.post("/register", AuthController.register);
-  router.post("/login", AuthController.login);
+function test() {
+  throw new HttpError(500, 'Testing test')
 }
+
+router.post('/register', AuthController.register)
+router.post('/login', AuthController.login)
+router.get('/test', test)
+
+export default router
