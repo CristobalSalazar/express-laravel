@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
+import { CONNECTION_STRING } from '../../config'
 
 export async function initMongoose() {
   return new Promise((res, rej) => {
@@ -8,6 +9,6 @@ export async function initMongoose() {
         useUnifiedTopology: true,
       })
       .catch(rej)
-      .then(res);
+      .then(res)
   })
 }
