@@ -1,17 +1,22 @@
-import { createModel, hasOne } from 'lib/models/create-model'
-import { User } from './user.model.ts'
+import { createModel, types } from "cheetah";
+import { CommentModel, PostModel, UserCollection } from "./collections";
 
-export type Post = {
-  title: string
-  body: string
-  user: User
+export interface IPost {
+  title: string;
+  body: string;
+  author: string;
+  comments?: string[];
 }
-
-const PostModel = createModel<Post>({
-  name: 'Post',
+export const Post = createModel<IPost>({
+  modelName: PostModel,
   schema: {
-    title: String,
-    body: String,
-    user: hasOne('User', true),
+    title: types().string().required(),
+    body: types().string().text().required(),
+    author: types().ref(UserCollection).autopopulate(),
+    comments: [types().ref(CommentModel).autopopulate()],
   },
-})
+  options: {
+    timestamps: true,
+  },
+  hooks: (schema) => {},
+});

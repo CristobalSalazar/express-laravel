@@ -1,13 +1,17 @@
-import HttpError from '../lib/errors/http-errors'
-import AuthController from '../controllers/auth.controller'
-import router from '../lib/router'
+import {
+  register,
+  login,
+  accessTokenCheck,
+  user,
+} from "../controllers/auth.controller";
 
-function test() {
-  throw new HttpError(500, 'Testing test')
-}
+import { createRouter } from "cheetah";
 
-router.post('/register', AuthController.register)
-router.post('/login', AuthController.login)
-router.get('/test', test)
+const router = createRouter();
 
-export default router
+router.get("/", () => "Hello World");
+router.post("/register", register);
+router.post("/login", login);
+router.get("/user", accessTokenCheck, user);
+
+export default router;
