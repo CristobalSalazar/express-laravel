@@ -1,65 +1,43 @@
-import { createModel, types } from "cheetah";
-import { Document } from "mongoose";
+import { createModel, def } from "cheetah";
 import bcrypt from "bcryptjs";
-import { UserCollection, RefreshTokenModel, ProfileModel } from "./collections";
+import { UserModel, ProfileModel, RefreshTokenModel } from "./collections";
 import { RefreshToken } from "./refresh-token.model";
 
-export const UserToken = "users";
-
-export interface IUser {
-  name: string;
-  email: string;
-  email_verified: boolean;
-  password: string;
-  profile?: string;
-  refreshToken?: string;
-  following?: [string];
-  posts?: [string];
-  role?: string;
-}
-
-export const User = createModel<IUser>({
-  modelName: UserToken,
+export const User = createModel({
+  modelName: UserModel,
+  options: { timestamps: true },
   schema: {
-    profile: types().ref(ProfileModel).autopopulate(),
-    refreshToken: types().ref(RefreshTokenModel).unique().hide(),
-    name: types().string().required().trim(),
-    email: types().string().required().lowercase().unique(),
-    email_verified: types().bool().default(false),
-    following: [types().ref(UserCollection)],
-    password: types().string().required().min(8).hide(),
-    role: types()
-      .string()
-      .allow("admin", "user", "unverified")
-      .default("unverified"),
+    name: def.string.required.trim,
+    profile: def.ref(ProfileModel).autopopulate,
+    email: def.string.required.lowercase.unique,
+    email_verified: def.boolean.default(false),
+    following: [def.ref(UserModel)],
+    password: def.string.required.minlength(8).hide,
+    refreshToken: def.ref(RefreshTokenModel).autopopulate.unique.hide,
+    role: def.string.allow("admin", "user", "unverified").default("unverified"),
   },
-  options: {
-    timestamps: true,
+  methods: {
+    async comparePassword(other: string) {
+      return await bcrypt.compare(other, this.password);
+    },
+    async newRefreshToken() {
+      const token = new RefreshToken();
+      token.user = this.id!;
+      await token.save();
+      this.refreshToken = token.id!;
+      return token.uuid;
+    },
   },
-  hooks: (schema) => {
-    schema.methods = {
-      async comparePassword(password: string) {
-        return await bcrypt.compare(password, this.password);
-      },
-      async createRefreshToken() {
-        const refreshToken = await RefreshToken.create({ user: this._id });
-        this.refreshToken = refreshToken._id;
-        await this.save();
-        return refreshToken.uuid;
-      },
-    };
-
-    schema.statics = {
-      async findByEmail(email: string) {
-        return await this.findOne({ email })
-      }
-    }
-
-    schema.pre<Document & IUser>("save", function (next) {
+  statics: {
+    async findByEmail(email: string) {
+      return await this.findOne({ email });
+    },
+  },
+  pre: {
+    async save() {
       if (this.isModified("password")) {
-        this.password = bcrypt.hashSync(this.password, 10);
+        this.password = await bcrypt.hash(this.password, 10);
       }
-      next(null);
-    });
+    },
   },
 });

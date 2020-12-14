@@ -1,5 +1,5 @@
-export const UserCollection = "users";
-export const CommentModel = "comments";
-export const PostModel = "posts";
-export const RefreshTokenModel = "refresh-tokens";
-export const ProfileModel = "profiles";
+export const UserModel = "user";
+export const CommentModel = "comment";
+export const PostModel = "post";
+export const RefreshTokenModel = "refresh_token";
+export const ProfileModel = "profile";

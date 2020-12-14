@@ -655,7 +655,7 @@
   resolved "http://localhost:4873/@types%2fmime/-/mime-2.0.3.tgz#c893b73721db73699943bfc3653b1deb7faa4a3a"
   integrity sha512-Jus9s4CDbqwocc5pOAnh8ShfrnMcPHuJYzVcSUU7lrh8Ni5HuIqX3oilL86p3dlTrk0LzHRCgA/GQ7uNCw6l2Q==
 
-"@types/mongodb@*", "@types/mongodb@^3.5.27":
+"@types/mongodb@^3.5.27":
   version "3.6.3"
   resolved "http://localhost:4873/@types%2fmongodb/-/mongodb-3.6.3.tgz#5655af409d9e32d5d5ae9a653abf3e5f9c83eb7a"
   integrity sha512-6YNqGP1hk5bjUFaim+QoFFuI61WjHiHE1BNeB41TA00Xd2K7zG4lcWyLLq/XtIp36uMavvS5hoAUJ+1u/GcX2Q==
@@ -663,15 +663,12 @@
     "@types/bson" "*"
     "@types/node" "*"
 
-"@types/mongoose@^5.7.37":
-  version "5.10.2"
-  resolved "http://localhost:4873/@types%2fmongoose/-/mongoose-5.10.2.tgz#761d73b78caaa2c4c745ab4fcca4cb976e3fad1e"
-  integrity sha512-n23tptnyVk0FDew/5YMG9eee5DQGRq2YLyFxm5b04V5QzCmomX6L8sA4BUv1s4ibr+HP9gCABIEhcItFOQi/dA==
-  dependencies:
-    "@types/mongodb" "*"
-    "@types/node" "*"
+"@types/node@*":
+  version "14.14.13"
+  resolved "http://localhost:4873/@types%2fnode/-/node-14.14.13.tgz#9e425079799322113ae8477297ae6ef51b8e0cdf"
+  integrity sha512-vbxr0VZ8exFMMAjCW8rJwaya0dMCDyYW2ZRdTyjtrCvJoENMpdUHOT/eTzvgyA5ZnqRZ/sI0NwqAxNHKYokLJQ==
 
-"@types/node@*", "@types/node@^14.14.6":
+"@types/node@^14.14.6":
   version "14.14.11"
   resolved "http://localhost:4873/@types%2fnode/-/node-14.14.11.tgz#fc25a4248a5e8d0837019b1d170146d07334abe0"
   integrity sha512-BJ97wAUuU3NUiUCp44xzUFquQEvnk1wu7q4CMEUYKJWjdkr0YWYDsm4RFtAvxYsNjLsKcrFt6RvK8r+mnzMbEQ==
@@ -1200,9 +1197,9 @@ char-regex@^1.0.2:
   integrity sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==
 
 cheetah@^1.0.3:
-  version "1.0.3"
-  resolved "http://localhost:4873/cheetah/-/cheetah-1.0.3.tgz#47d4f314394a104b6d8bb0113016a4abcbfc39ed"
-  integrity sha512-l2yDutbTICIE3FtF0oNcJ/SisPDayQpiCkvHlkvgQCNzpRYwSqX3sOdXT7P/jTNytd3owMUt3cQpGZj9fpN0RQ==
+  version "1.0.16"
+  resolved "http://localhost:4873/cheetah/-/cheetah-1.0.16.tgz#d4d21c40925522dcb52b178e502ba269e4fdbfa6"
+  integrity sha512-gcYWXDj1V2dcmIWDRsUaUUD0NkCtLK74q1wwOpsSrNDr8+daGTtM29ptYRCqhMSj3Fbb8wzdvQB5XYnayXJDCw==
   dependencies:
     express "^4.17.1"
     joi "^17.3.0"
@@ -3070,11 +3067,6 @@ kareem@2.3.1:
   resolved "http://localhost:4873/kareem/-/kareem-2.3.1.tgz#def12d9c941017fabfb00f873af95e9c99e1be87"
   integrity sha512-l3hLhffs9zqoDe8zjmb/mAN4B8VT3L56EUvKNqLFVs9YlFA+zx7ke1DO8STAdDyYNkeSo1nKmjuvQeI12So8Xw==
 
-kareem@2.3.2:
-  version "2.3.2"
-  resolved "http://localhost:4873/kareem/-/kareem-2.3.2.tgz#78c4508894985b8d38a0dc15e1a8e11078f2ca93"
-  integrity sha512-STHz9P7X2L4Kwn72fA4rGyqyXdmrMSdxqHx9IXon/FXluXieaFA6KJ2upcHAHxQPQ0LeM/OjLrhFxifHewOALQ==
-
 keyv@^3.0.0:
   version "3.1.0"
   resolved "http://localhost:4873/keyv/-/keyv-3.1.0.tgz#ecc228486f69991e49e9476485a5be1e8fc5c4d9"
@@ -3391,24 +3383,6 @@ mongoose@5.11.4:
     "@types/mongodb" "^3.5.27"
     bson "^1.1.4"
     kareem "2.3.1"
-    mongodb "3.6.3"
-    mongoose-legacy-pluralize "1.0.2"
-    mpath "0.8.0"
-    mquery "3.2.2"
-    ms "2.1.2"
-    regexp-clone "1.0.0"
-    safe-buffer "5.2.1"
-    sift "7.0.1"
-    sliced "1.0.1"
-
-mongoose@^5.10.13:
-  version "5.11.6"
-  resolved "http://localhost:4873/mongoose/-/mongoose-5.11.6.tgz#906aa8bddddcafbd02b9c1a46600d7c0d19a0830"
-  integrity sha512-sLM8gwgC6h/mM4kPsmQOBleKFwy/iY+h8nnqZgoI+MaqGNqidpLIM8yKjiWw8H10FuDf9Hq14biVKxMT4WgnXA==
-  dependencies:
-    "@types/mongodb" "^3.5.27"
-    bson "^1.1.4"
-    kareem "2.3.2"
     mongodb "3.6.3"
     mongoose-legacy-pluralize "1.0.2"
     mpath "0.8.0"
@@ -4881,16 +4855,6 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
-
-validator@^13.1.17:
-  version "13.5.1"
-  resolved "http://localhost:4873/validator/-/validator-13.5.1.tgz#3926dfdd07a7e7325ab657fe46f2143eac55f076"
-  integrity sha512-s+7LW1Xi0OzPNfGN7Hb2vk0YB/epp9KFHHGC5JtqZOE1dUkN4ULPFZAQ1inCu7ceAsWmOJu6sn9cnwm3R+ghWQ==
-
-validatorjs@^3.20.0:
-  version "3.22.1"
-  resolved "http://localhost:4873/validatorjs/-/validatorjs-3.22.1.tgz#13dbbe6556cf4ab87759105d13b1d31a9a54ce54"
-  integrity sha512-451KiCt/3E8qV/8fOUdO0YkA8zUdQBNVxubg9jvgEB+JAg9IlRKrClzwq2ir2ndj7TWmPYQ7bXFb4BxcyX2iWw==
 
 vary@~1.1.2:
   version "1.1.2"

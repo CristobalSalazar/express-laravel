@@ -1,21 +1,12 @@
-import { createModel, types } from "cheetah";
-import { UserCollection } from "./collections";
+import { createModel, def } from "cheetah";
+import { ProfileModel, UserModel } from "./collections";
 
-export interface IProfile {
-  bio: string;
-  user: string;
-  avatarUrl: string;
-  coverPhotoUrl: string;
-}
-
-export const ProfileModelName = "profiles";
-
-export const Profile = createModel<IProfile>({
-  modelName: ProfileModelName,
+export const Profile = createModel({
+  modelName: ProfileModel,
   schema: {
-    user: types().ref(UserCollection).required(),
-    bio: types().string().required(),
-    avatarUrl: types().string().required(),
-    coverPhotoUrl: types().string().required(),
+    user: def.ref(UserModel).required,
+    bio: def.string.required,
+    avatarUrl: def.string.required,
+    coverPhotoUrl: def.string.required,
   },
 });

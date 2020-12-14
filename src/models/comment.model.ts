@@ -1,19 +1,12 @@
-import { createModel, types } from "cheetah";
-import { CommentModel, UserCollection } from "./collections";
+import { createModel, def } from "cheetah";
+import { CommentModel, UserModel } from "./collections";
 
-interface IComment {
-  body: string;
-  author: string;
-  replies: string[];
-  likes: number;
-}
-
-export const Comment = createModel<IComment>({
+export const Comment = createModel({
   modelName: CommentModel,
   schema: {
-    body: types().string().required().text(),
-    author: types().ref(UserCollection).required(),
-    replies: [types().ref(CommentModel)],
-    likes: types().number().default(0),
+    body: def.string.required.text,
+    author: def.ref(UserModel).required,
+    replies: [def.ref(CommentModel)],
+    likes: def.number.default(0),
   },
 });

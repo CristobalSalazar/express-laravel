@@ -1,24 +1,17 @@
-import { createModel, types } from "cheetah";
+import { createModel, def } from "cheetah";
 import { v4 as uuid } from "uuid";
-import { UserCollection } from "./collections";
+import { RefreshTokenModel, UserModel } from "./collections";
 
-type TRefreshToken = {
-  user: string;
-  uuid?: string;
-};
-
-export const RefreshTokenModel = "refresh_tokens";
-
-export const RefreshToken = createModel<TRefreshToken>({
+export const RefreshToken = createModel({
   modelName: RefreshTokenModel,
+  options: { timestamps: { createdAt: true, updatedAt: false } },
   schema: {
-    user: types().ref(UserCollection).required(),
-    uuid: types().string().unique().default(uuid),
+    user: def.ref(UserModel),
+    uuid: def.string.required,
   },
-  options: {
-    timestamps: {
-      createdAt: true,
-      updatedAt: false,
+  pre: {
+    save() {
+      this.uuid = uuid();
     },
   },
 });

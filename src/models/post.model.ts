@@ -1,22 +1,15 @@
-import { createModel, types } from "cheetah";
-import { CommentModel, PostModel, UserCollection } from "./collections";
+import { createModel, def } from "cheetah";
+import { CommentModel, PostModel, UserModel } from "./collections";
 
-export interface IPost {
-  title: string;
-  body: string;
-  author: string;
-  comments?: string[];
-}
-export const Post = createModel<IPost>({
+export const Post = createModel({
   modelName: PostModel,
   schema: {
-    title: types().string().required(),
-    body: types().string().text().required(),
-    author: types().ref(UserCollection).autopopulate(),
-    comments: [types().ref(CommentModel).autopopulate()],
+    title: def.string.required,
+    body: def.string.text.required,
+    author: def.ref(UserModel).autopopulate,
+    comments: [def.ref(CommentModel).autopopulate],
   },
   options: {
     timestamps: true,
   },
-  hooks: (schema) => {},
 });
